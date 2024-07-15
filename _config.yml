@@ -1,3 +1,5 @@
 theme: Jun-Morita
 title: Jun-Morita's homepage
 description: Bookmark this to keep an eye on my project updates!
+theme: minima
+markdown: kramdown
