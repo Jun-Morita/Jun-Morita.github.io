@@ -15,51 +15,86 @@ stocks = {
 # 株価データを取得
 stock_data = {}
 for name, ticker in stocks.items():
-    stock_data[name] = yf.download(ticker, start='2020-01-01', end='2023-01-01')
+    stock_data[name] = yf.download(ticker, start='2020-01-01', end='2024-10-09')
 
 # インタラクティブなグラフの作成
 fig = make_subplots(rows=1, cols=1)
 
-# Appleのデータをデフォルトで追加
-fig.add_trace(go.Scatter(x=stock_data['Apple'].index, y=stock_data['Apple']['Close'], name='Apple'))
+# Appleのローソク足データをデフォルトで追加
+fig.add_trace(go.Candlestick(x=stock_data['Apple'].index,
+                             open=stock_data['Apple']['Open'],
+                             high=stock_data['Apple']['High'],
+                             low=stock_data['Apple']['Low'],
+                             close=stock_data['Apple']['Close'],
+                             name='Apple'))
 
 # レイアウトの設定
 fig.update_layout(
-    title="Top 6 Companies Stock Price Over Time",
+    title="Top 6 Companies Stock Prices (Candlestick)",
     xaxis_title="Date",
     yaxis_title="Stock Price (USD)",
     updatemenus=[
         {
             "buttons": [
                 {
-                    "args": [{"y": [stock_data['Apple']['Close']], "name": "Apple"}],
+                    "args": [{"x": [stock_data['Apple'].index],
+                              "open": [stock_data['Apple']['Open']],
+                              "high": [stock_data['Apple']['High']],
+                              "low": [stock_data['Apple']['Low']],
+                              "close": [stock_data['Apple']['Close']],
+                              "name": "Apple"}],
                     "label": "Apple",
-                    "method": "update"
+                    "method": "restyle"
                 },
                 {
-                    "args": [{"y": [stock_data['Microsoft']['Close']], "name": "Microsoft"}],
+                    "args": [{"x": [stock_data['Microsoft'].index],
+                              "open": [stock_data['Microsoft']['Open']],
+                              "high": [stock_data['Microsoft']['High']],
+                              "low": [stock_data['Microsoft']['Low']],
+                              "close": [stock_data['Microsoft']['Close']],
+                              "name": "Microsoft"}],
                     "label": "Microsoft",
-                    "method": "update"
+                    "method": "restyle"
                 },
                 {
-                    "args": [{"y": [stock_data['NVIDIA']['Close']], "name": "NVIDIA"}],
+                    "args": [{"x": [stock_data['NVIDIA'].index],
+                              "open": [stock_data['NVIDIA']['Open']],
+                              "high": [stock_data['NVIDIA']['High']],
+                              "low": [stock_data['NVIDIA']['Low']],
+                              "close": [stock_data['NVIDIA']['Close']],
+                              "name": "NVIDIA"}],
                     "label": "NVIDIA",
-                    "method": "update"
+                    "method": "restyle"
                 },
                 {
-                    "args": [{"y": [stock_data['Amazon']['Close']], "name": "Amazon"}],
+                    "args": [{"x": [stock_data['Amazon'].index],
+                              "open": [stock_data['Amazon']['Open']],
+                              "high": [stock_data['Amazon']['High']],
+                              "low": [stock_data['Amazon']['Low']],
+                              "close": [stock_data['Amazon']['Close']],
+                              "name": "Amazon"}],
                     "label": "Amazon",
-                    "method": "update"
+                    "method": "restyle"
                 },
                 {
-                    "args": [{"y": [stock_data['Meta']['Close']], "name": "Meta"}],
+                    "args": [{"x": [stock_data['Meta'].index],
+                              "open": [stock_data['Meta']['Open']],
+                              "high": [stock_data['Meta']['High']],
+                              "low": [stock_data['Meta']['Low']],
+                              "close": [stock_data['Meta']['Close']],
+                              "name": "Meta"}],
                     "label": "Meta",
-                    "method": "update"
+                    "method": "restyle"
                 },
                 {
-                    "args": [{"y": [stock_data['Alphabet']['Close']], "name": "Alphabet"}],
+                    "args": [{"x": [stock_data['Alphabet'].index],
+                              "open": [stock_data['Alphabet']['Open']],
+                              "high": [stock_data['Alphabet']['High']],
+                              "low": [stock_data['Alphabet']['Low']],
+                              "close": [stock_data['Alphabet']['Close']],
+                              "name": "Alphabet"}],
                     "label": "Alphabet",
-                    "method": "update"
+                    "method": "restyle"
                 }
             ],
             "direction": "down",
