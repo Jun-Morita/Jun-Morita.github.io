@@ -1,6 +1,7 @@
 import plotly.graph_objects as go
 import yfinance as yf
 from plotly.subplots import make_subplots
+from datetime import datetime, timedelta
 
 # トップ6社のティッカーシンボル
 stocks = {
@@ -12,10 +13,14 @@ stocks = {
     'Alphabet': 'GOOGL'
 }
 
+# 今日の日付を取得し、前日の日付を計算
+today = datetime.today()
+yesterday = today - timedelta(days=1)
+
 # 株価データを取得
 stock_data = {}
 for name, ticker in stocks.items():
-    stock_data[name] = yf.download(ticker, start='2020-01-01', end='2024-10-09')
+    stock_data[name] = yf.download(ticker, start='2020-01-01', end=yesterday.strftime('%Y-%m-%d'))
 
 # インタラクティブなグラフの作成
 fig = make_subplots(rows=1, cols=1)
